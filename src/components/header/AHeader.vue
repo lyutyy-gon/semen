@@ -1,8 +1,14 @@
 <template>
   <div class="app-header">
-    <div class="app-header__wrapper">
+    <ALogo />
+    <div
+      class="app-header__wrapper"
+      :class="{
+        'app-header__active': isHeaderActive,
+        'app-header__passive': !isHeaderActive,
+      }"
+    >
       <AMenu />
-      <ALogo />
       <ACallbackForm />
     </div>
   </div>
@@ -15,6 +21,7 @@ import ACallbackForm from "./ACallbackForm";
 
 export default {
   name: "AHeader",
+  props: ["isHeaderActive"],
   components: {
     AMenu,
     ALogo,
@@ -27,15 +34,21 @@ export default {
 .app-header {
   position: fixed;
   min-width: 100%;
-  background: lime;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 100;
 }
 
 .app-header__wrapper {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 90%;
-  margin: 0px auto;
-  padding: 20px 0px;
+}
+
+.app-header__active {
+  min-height: 90vh;
+  transition: min-height 0.5s ease-out;
+}
+
+.app-header__passive {
+  min-height: 25vh;
+  transition: min-height 0.5s ease-out;
 }
 </style>
